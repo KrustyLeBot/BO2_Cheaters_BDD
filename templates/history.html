@@ -24,12 +24,10 @@
         <h3><strong>Type de cheat</strong></h3>
       </td>
     </tr>
-    {% for key, value in records %}
+    {% for item in records %}
       <tr>
-        {% if key=='records' %}
-          <td style="text-align: center;" valign="top">{{ value.0 }}</td>
-          <td style="text-align: center;" valign="top">{{ value.1 }}</td>
-        {% endif %}
+        <td style="text-align: center;" valign="top">{{ item.0 }}</td>
+        <td style="text-align: center;" valign="top">{{ item.1 }}</td>
       </tr>
     {% endfor %}
   </table>
