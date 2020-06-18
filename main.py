@@ -10,6 +10,8 @@ api = Api(app)
 
 mainDict = dict()
 cheatTypes = ["Wallhack", "Aimbot", "Silent Aimbot", "VSAT", "Auto Crash Game"]
+lastUserSearched = {}
+lastUserSearchedId = ""
 
 #####################################
 def Init():
@@ -126,8 +128,8 @@ def GenerateStatsImg():
 
 @app.route('/')
 def index():
-    global mainDict, cheatTypes
-    return render_template("index.html", mainDict = mainDict, cheatTypes = cheatTypes, todayStats = GetTodayStats())
+    global mainDict, cheatTypes, lastUserSearched, lastUserSearchedId
+    return render_template("index.html", mainDict = mainDict, cheatTypes = cheatTypes, todayStats = GetTodayStats(), userSearched = lastUserSearched, userSearchedId = lastUserSearchedId)
 
 
 @app.route('/addRecord',methods = ['POST'])
@@ -157,8 +159,19 @@ def getUserStats():
     global mainDict, cheatTypes
     reqParam = request.form
 
-    return render_template("specificUserStats.html", user = GetUser(reqParam['steamId']))
+    return render_template("history.html", playerId = GetUser(reqParam['steamId'])["steamId"], playerName = GetUser(reqParam['steamId'])["lastName"], records = GetUser(reqParam['steamId']))
 
+
+@app.route('/search',methods = ['POST'])
+def search():
+    global mainDict, cheatTypes, lastUserSearched, lastUserSearchedId
+    reqParam = request.form
+
+    if reqParam['steamId'] != "" and CheckUserExist(reqParam['steamId']):
+        lastUserSearched = GetUser(reqParam['steamId'])
+        lastUserSearchedId = GetUser(reqParam['steamId'])["steamId"]
+
+    return redirect("http://localhost:8666/", code=302)
 
 if __name__ == '__main__':
      app.run(port='8666', host='0.0.0.0')

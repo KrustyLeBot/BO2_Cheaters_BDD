@@ -43,6 +43,69 @@
 
 <br>
 
+
+<form id="search" action="http://localhost:8666/search" method="post"></form>
+
+<center><h2>Steam Id du cheater à recherche:</h2></center>
+<center><input type="text" id="steamId" name="steamId" form="search" placeholder="{{ userSearchedId }}"></center>
+<center><input type="submit" value="Rechercher" form="search"></center>
+
+<center>
+  <table border="border-collapse">
+    <tr>
+      <td style="text-align: center;">
+        <h3><strong>Historique</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>SteamId</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Pseudo</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Nombre de fois rencontré</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Dernière Rencontre</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Dernier Cheat Utilisé</strong></h3>
+      </td>
+    </tr>
+    <tr>
+      {% for key2, value2 in userSearched.items() %}
+          {% if key2=='steamId' %}
+            <td style="text-align: center;">
+              <form action="http://localhost:8666/getUserStats" method="post">
+                <input type="hidden" id="steamId" name="steamId" value="{{ value2 }}">
+                <input type="submit" value="Voir Historique">
+              </form>
+            </td>
+            <td style="text-align: center;" valign="top">{{ value2 }}</td>
+          {% endif %}
+          {% if key2=='lastName' %}
+            <td style="text-align: center;" valign="top">{{ value2 }}</td>
+          {% endif %}
+          {% if key2=='recordsCount' %}
+            <td style="text-align: center;" valign="top">{{ value2 }}</td>
+          {% endif %}
+          {% if key2=='lastRecordTime' %}
+            <td style="text-align: center;" valign="top">{{ value2 }}</td>
+          {% endif %}
+          {% if key2=='lastRecordType' %}
+            <td style="text-align: center;" valign="top">{{ value2 }}</td>
+          {% endif %}
+        {% endfor %}
+    </tr>
+  </table>
+</center>
+
+
+<br>
+<br>
+<br>
+
+
 <center>
   <table border="border-collapse">
     <tr>
@@ -71,7 +134,8 @@
           {% for key2, value2 in value.items() %}
             {% if key2=='steamId' %}
               <td style="text-align: center;">
-                <form action="http://localhost:8666" method="post">
+                <form action="http://localhost:8666/getUserStats" method="post">
+                  <input type="hidden" id="steamId" name="steamId" value="{{ value2 }}">
                   <input type="submit" value="Voir Historique">
                 </form>
               </td>

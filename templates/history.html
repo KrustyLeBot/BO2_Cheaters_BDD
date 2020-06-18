@@ -1,0 +1,36 @@
+<center><h2>Historique de {{ playerId }} / {{ playerName }}</h2></center>
+
+
+<center>
+  <table>
+    <tr>
+      <td style="text-align: center;">
+        <form action="http://localhost:8666/" method="get" id="form"></form>
+        <input type="submit" value="Retour" form="form">
+      </td>
+    </tr>
+  </table>
+</center>
+
+<br>
+
+<center>
+  <table border="border-collapse">
+    <tr>
+      <td style="text-align: center;">
+        <h3><strong>Date</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Type de cheat</strong></h3>
+      </td>
+    </tr>
+    {% for key, value in records.items() %}
+      <tr>
+        {% if key!='lastRecordType' and key!='lastRecordTime' and key!='recordsCount' and key!='steamId' and key!='lastName' %}
+          <td style="text-align: center;" valign="top">{{ key }}</td>
+          <td style="text-align: center;" valign="top">{{ value }}</td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </table>
+</center>
