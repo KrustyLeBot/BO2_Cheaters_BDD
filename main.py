@@ -102,7 +102,7 @@ def GetTodayCheatedGamesCount():
         AddNewDay()
 
     timestamp = datetime.datetime.now().strftime("%d/%m/%Y")
-    
+
     return mainDict["STATS"][timestamp]["cheatedGamesCount"]
 
 def GetTodayLegitGamesCount():
@@ -183,7 +183,7 @@ def getUserStats():
     global mainDict, cheatTypes
     reqParam = request.form
 
-    return render_template("history.html", playerId = GetUser(reqParam['steamId'])["steamId"], playerName = GetUser(reqParam['steamId'])["lastName"], records = GetUser(reqParam['steamId']))
+    return render_template("history.html", playerId = GetUser(reqParam['steamId'])["steamId"], playerName = GetUser(reqParam['steamId'])["lastName"], records = GetUser(reqParam['steamId'])["records"])
 
 
 @app.route('/search',methods = ['POST'])
