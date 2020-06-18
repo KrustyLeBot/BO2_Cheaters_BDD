@@ -140,7 +140,7 @@ def addRecord():
     if reqParam['steamId'] != "":
         AddRecord(reqParam['steamId'], reqParam['cheatType'])
 
-    return redirect("http://localhost:8666/", code=302)
+    return redirect("http://192.168.1.111:8666/", code=302)
 
 
 @app.route('/updateTodayStats',methods = ['POST'])
@@ -151,7 +151,7 @@ def updateTodayStats():
     AddGame(int(reqParam['cheated']))
     
 
-    return redirect("http://localhost:8666/", code=302)
+    return redirect("http://192.168.1.111:8666/", code=302)
 
 
 @app.route('/getUserStats',methods = ['POST'])
@@ -171,7 +171,7 @@ def search():
         lastUserSearched = GetUser(reqParam['steamId'])
         lastUserSearchedId = GetUser(reqParam['steamId'])["steamId"]
 
-    return redirect("http://localhost:8666/", code=302)
+    return redirect("http://192.168.1.111:8666/", code=302)
 
 if __name__ == '__main__':
      app.run(port='8666', host='0.0.0.0')

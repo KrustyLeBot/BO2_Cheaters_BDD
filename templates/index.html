@@ -4,8 +4,8 @@
 <center><h2>Aujourd'hui: {{todayStats}}% de game cheatées</font></h2></center>
 
 
-<form action="http://localhost:8666/updateTodayStats" method="post" id="updateTodayStats_Legit"></form>
-<form action="http://localhost:8666/updateTodayStats" method="post" id="updateTodayStats_Cheated"></form>
+<form action="http://192.168.1.111:8666/updateTodayStats" method="post" id="updateTodayStats_Legit"></form>
+<form action="http://192.168.1.111:8666/updateTodayStats" method="post" id="updateTodayStats_Cheated"></form>
 
 <input type="hidden" id="cheated" name="cheated" value="0" form="updateTodayStats_Legit">
 <input type="hidden" id="cheated" name="cheated" value="1" form="updateTodayStats_Cheated">
@@ -23,7 +23,7 @@
   </table>
 </center>
 
-<form id="addRecord" action="http://localhost:8666/addRecord" method="post"></form>
+<form id="addRecord" action="http://192.168.1.111:8666/addRecord" method="post"></form>
 
 <center><h2>Steam Id du cheater à ajouter:</h2></center>
 <center><input type="text" id="steamId" name="steamId" form="addRecord"></center>
@@ -44,7 +44,7 @@
 <br>
 
 
-<form id="search" action="http://localhost:8666/search" method="post"></form>
+<form id="search" action="http://192.168.1.111:8666/search" method="post"></form>
 
 <center><h2>Steam Id du cheater à recherche:</h2></center>
 <center><input type="text" id="steamId" name="steamId" form="search" placeholder="{{ userSearchedId }}"></center>
@@ -76,7 +76,7 @@
       {% for key2, value2 in userSearched.items() %}
           {% if key2=='steamId' %}
             <td style="text-align: center;">
-              <form action="http://localhost:8666/getUserStats" method="post">
+              <form action="http://192.168.1.111:8666/getUserStats" method="post">
                 <input type="hidden" id="steamId" name="steamId" value="{{ value2 }}">
                 <input type="submit" value="Voir Historique">
               </form>
@@ -134,7 +134,7 @@
           {% for key2, value2 in value.items() %}
             {% if key2=='steamId' %}
               <td style="text-align: center;">
-                <form action="http://localhost:8666/getUserStats" method="post">
+                <form action="http://192.168.1.111:8666/getUserStats" method="post">
                   <input type="hidden" id="steamId" name="steamId" value="{{ value2 }}">
                   <input type="submit" value="Voir Historique">
                 </form>
