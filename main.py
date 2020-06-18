@@ -61,7 +61,7 @@ def AddRecord(steamId, cheatType):
         AddUser(steamId)
 
     timestamp = datetime.datetime.now().strftime("%A, %d. %B %Y %H:%M:%S")
-    mainDict[steamId]["records"].append((timestamp, cheatType))
+    mainDict[steamId]["records"].insert(0, (timestamp, cheatType))
 
     mainDict[steamId]["recordsCount"] = mainDict[steamId]["recordsCount"] + 1
     mainDict[steamId]["lastRecordTime"] = timestamp

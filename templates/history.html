@@ -26,9 +26,9 @@
     </tr>
     {% for key, value in records.items() %}
       <tr>
-        {% if key!='lastRecordType' and key!='lastRecordTime' and key!='recordsCount' and key!='steamId' and key!='lastName' %}
-          <td style="text-align: center;" valign="top">{{ key }}</td>
-          <td style="text-align: center;" valign="top">{{ value }}</td>
+        {% if key=='records' %}
+          <td style="text-align: center;" valign="top">{{ value.0 }}</td>
+          <td style="text-align: center;" valign="top">{{ value.1 }}</td>
         {% endif %}
       </tr>
     {% endfor %}
