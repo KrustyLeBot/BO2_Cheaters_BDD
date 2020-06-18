@@ -101,6 +101,8 @@ def GetTodayCheatedGamesCount():
     if not CheckTodayExist():
         AddNewDay()
 
+    timestamp = datetime.datetime.now().strftime("%d/%m/%Y")
+    
     return mainDict["STATS"][timestamp]["cheatedGamesCount"]
 
 def GetTodayLegitGamesCount():
@@ -108,6 +110,8 @@ def GetTodayLegitGamesCount():
 
     if not CheckTodayExist():
         AddNewDay()
+
+    timestamp = datetime.datetime.now().strftime("%d/%m/%Y")
 
     return mainDict["STATS"][timestamp]["legitGamesCount"]
 
