@@ -1,7 +1,7 @@
 
 <center><h2>BBD Cheater BO2</h2></center>
 
-<center><h2>Aujourd'hui: {{todayStats}}% de game cheatées</font></h2></center>
+<center><h2>Aujourd'hui: {{todayStats}}% de game cheatées ({{ todayCheatedGamesCount }} sur {{ todayLegitGamesCount }})</font></h2></center>
 
 
 <form action="http://192.168.1.111:8666/updateTodayStats" method="post" id="updateTodayStats_Legit"></form>
@@ -74,28 +74,40 @@
     </tr>
     <tr>
       {% for key2, value2 in userSearched.items() %}
-          {% if key2=='steamId' %}
-            <td style="text-align: center;">
-              <form action="http://192.168.1.111:8666/getUserStats" method="post">
-                <input type="hidden" id="steamId" name="steamId" value="{{ value2 }}">
-                <input type="submit" value="Voir Historique">
-              </form>
-            </td>
-            <td style="text-align: center;" valign="top">{{ value2 }}</td>
-          {% endif %}
-          {% if key2=='lastName' %}
-            <td style="text-align: center;" valign="top">{{ value2 }}</td>
-          {% endif %}
-          {% if key2=='recordsCount' %}
-            <td style="text-align: center;" valign="top">{{ value2 }}</td>
-          {% endif %}
-          {% if key2=='lastRecordTime' %}
-            <td style="text-align: center;" valign="top">{{ value2 }}</td>
-          {% endif %}
-          {% if key2=='lastRecordType' %}
-            <td style="text-align: center;" valign="top">{{ value2 }}</td>
-          {% endif %}
-        {% endfor %}
+        {% if key2=='steamId' %}
+          <td style="text-align: center;">
+            <form action="http://192.168.1.111:8666/getUserStats" method="post">
+              <input type="hidden" id="steamId" name="steamId" value="{{ value2 }}">
+              <input type="submit" value="Voir Historique">
+            </form>
+          </td>
+          <td style="text-align: center;" valign="top">{{ value2 }}</td>
+        {% endif %}
+      {% endfor %}
+
+      {% for key2, value2 in userSearched.items() %}
+        {% if key2=='lastName' %}
+          <td style="text-align: center;" valign="top">{{ value2 }}</td>
+        {% endif %}
+      {% endfor %}
+
+      {% for key2, value2 in userSearched.items() %}
+        {% if key2=='recordsCount' %}
+          <td style="text-align: center;" valign="top">{{ value2 }}</td>
+        {% endif %}
+      {% endfor %}
+
+      {% for key2, value2 in userSearched.items() %}
+        {% if key2=='lastRecordTime' %}
+          <td style="text-align: center;" valign="top">{{ value2 }}</td>
+        {% endif %}
+      {% endfor %}
+
+      {% for key2, value2 in userSearched.items() %}
+        {% if key2=='lastRecordType' %}
+          <td style="text-align: center;" valign="top">{{ value2 }}</td>
+        {% endif %}
+      {% endfor %}
     </tr>
   </table>
 </center>
@@ -141,15 +153,27 @@
               </td>
               <td style="text-align: center;" valign="top">{{ value2 }}</td>
             {% endif %}
+          {% endfor %}
+          
+          {% for key2, value2 in value.items() %}
             {% if key2=='lastName' %}
               <td style="text-align: center;" valign="top">{{ value2 }}</td>
             {% endif %}
+          {% endfor %}
+
+          {% for key2, value2 in value.items() %}
             {% if key2=='recordsCount' %}
               <td style="text-align: center;" valign="top">{{ value2 }}</td>
             {% endif %}
+          {% endfor %}
+
+          {% for key2, value2 in value.items() %}
             {% if key2=='lastRecordTime' %}
               <td style="text-align: center;" valign="top">{{ value2 }}</td>
             {% endif %}
+          {% endfor %}
+
+          {% for key2, value2 in value.items() %}
             {% if key2=='lastRecordType' %}
               <td style="text-align: center;" valign="top">{{ value2 }}</td>
             {% endif %}

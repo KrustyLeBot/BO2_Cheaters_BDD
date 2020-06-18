@@ -46,6 +46,9 @@ def AddUser(steamId):
     mainDict[steamId]["steamId"] = steamId
     mainDict[steamId]["lastName"] = GetUserNameFromSteam(steamId)
     mainDict[steamId]["recordsCount"] = 0
+    mainDict[steamId]["lastRecordTime"] = ""
+    mainDict[steamId]["lastRecordType"] = ""
+    mainDict[steamId]["records"] = []
 
 def CheckUserExist(steamId):
     global mainDict
@@ -58,7 +61,7 @@ def AddRecord(steamId, cheatType):
         AddUser(steamId)
 
     timestamp = datetime.datetime.now().strftime("%A, %d. %B %Y %H:%M:%S")
-    mainDict[steamId][timestamp] = cheatType
+    mainDict[steamId]["records"].append((timestamp, cheatType))
 
     mainDict[steamId]["recordsCount"] = mainDict[steamId]["recordsCount"] + 1
     mainDict[steamId]["lastRecordTime"] = timestamp
@@ -67,7 +70,7 @@ def AddRecord(steamId, cheatType):
     WriteBDDToFile()
 
 def GetUserNameFromSteam(steamId):
-    return "UNKNOWN_YET"
+    return "NOT_IMPLEMENTED_YET"
 
 def GetUser(steamId):
     global mainDict
@@ -90,6 +93,17 @@ def AddGame(cheated):
         mainDict["STATS"][timestamp]["legitGamesCount"] = mainDict["STATS"][timestamp]["legitGamesCount"] + 1
 
     WriteBDDToFile()
+
+
+def GetTodayCheatedGamesCount():
+    global mainDict
+
+    return mainDict["STATS"][timestamp]["cheatedGamesCount"]
+
+def GetTodayLegitGamesCount():
+    global mainDict
+
+    return mainDict["STATS"][timestamp]["legitGamesCount"]
 
 def GetTodayStats():
     global mainDict
@@ -129,7 +143,7 @@ def GenerateStatsImg():
 @app.route('/')
 def index():
     global mainDict, cheatTypes, lastUserSearched, lastUserSearchedId
-    return render_template("index.html", mainDict = mainDict, cheatTypes = cheatTypes, todayStats = GetTodayStats(), userSearched = lastUserSearched, userSearchedId = lastUserSearchedId)
+    return render_template("index.html", mainDict = mainDict, cheatTypes = cheatTypes, todayCheatedGamesCount = GetTodayCheatedGamesCount(), todayLegitGamesCount = GetTodayLegitGamesCount(), todayStats = GetTodayStats(), userSearched = lastUserSearched, userSearchedId = lastUserSearchedId)
 
 
 @app.route('/addRecord',methods = ['POST'])
