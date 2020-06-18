@@ -1,0 +1,97 @@
+
+<center><h2>BBD Cheater BO2</h2></center>
+
+<center><h2>Aujourd'hui: {{todayStats}}% de game cheatées</font></h2></center>
+
+
+<form action="http://localhost:8666/updateTodayStats" method="post" id="updateTodayStats_Legit"></form>
+<form action="http://localhost:8666/updateTodayStats" method="post" id="updateTodayStats_Cheated"></form>
+
+<input type="hidden" id="cheated" name="cheated" value="0" form="updateTodayStats_Legit">
+<input type="hidden" id="cheated" name="cheated" value="1" form="updateTodayStats_Cheated">
+
+<center>
+  <table>
+    <tr>
+      <td style="text-align: center;">
+        <input type="submit" value="Add Legit Game" form="updateTodayStats_Legit">
+      </td>
+      <td style="text-align: center;">
+        <input type="submit" value="Add Cheated Game" form="updateTodayStats_Cheated">
+      </td>
+    </tr>
+  </table>
+</center>
+
+<form id="addRecord" action="http://localhost:8666/addRecord" method="post"></form>
+
+<center><h2>Steam Id du cheater à ajouter:</h2></center>
+<center><input type="text" id="steamId" name="steamId" form="addRecord"></center>
+
+<center>
+<label for="cheatType">Cheat utilisé ?</label>
+
+<select name="cheatType" id="cheatType" form="addRecord">
+  {% for key in cheatTypes %}
+    <option value="{{ key }}">{{ key }}</option>
+  {% endfor %}
+</select> 
+
+</center>
+
+<center><input type="submit" value="Ajouter" form="addRecord"></center>
+
+<br>
+
+<center>
+  <table border="border-collapse">
+    <tr>
+      <td style="text-align: center;">
+        <h3><strong>Historique</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>SteamId</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Pseudo</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Nombre de fois rencontré</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Dernière Rencontre</strong></h3>
+      </td>
+      <td style="text-align: center;">
+        <h3><strong>Dernier Cheat Utilisé</strong></h3>
+      </td>
+    </tr>
+    {% for key, value in mainDict.items() %}
+      <tr>
+        {% if key!='STATS' %}
+          {% for key2, value2 in value.items() %}
+            {% if key2=='steamId' %}
+              <td style="text-align: center;">
+                <form action="http://localhost:8666" method="post">
+                  <input type="submit" value="Voir Historique">
+                </form>
+              </td>
+              <td style="text-align: center;" valign="top">{{ value2 }}</td>
+            {% endif %}
+            {% if key2=='lastName' %}
+              <td style="text-align: center;" valign="top">{{ value2 }}</td>
+            {% endif %}
+            {% if key2=='recordsCount' %}
+              <td style="text-align: center;" valign="top">{{ value2 }}</td>
+            {% endif %}
+            {% if key2=='lastRecordTime' %}
+              <td style="text-align: center;" valign="top">{{ value2 }}</td>
+            {% endif %}
+            {% if key2=='lastRecordType' %}
+              <td style="text-align: center;" valign="top">{{ value2 }}</td>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </table>
+</center>
