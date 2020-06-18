@@ -98,10 +98,16 @@ def AddGame(cheated):
 def GetTodayCheatedGamesCount():
     global mainDict
 
+    if not CheckTodayExist():
+        AddNewDay()
+
     return mainDict["STATS"][timestamp]["cheatedGamesCount"]
 
 def GetTodayLegitGamesCount():
     global mainDict
+
+    if not CheckTodayExist():
+        AddNewDay()
 
     return mainDict["STATS"][timestamp]["legitGamesCount"]
 
